@@ -43,7 +43,7 @@ class Ostan(db.Entity):
 
 
 @db_session
-def run(dry=False):
+def correct_users(dry=False):
     users = Users.select()
     city_logs = dict()
 
@@ -74,5 +74,5 @@ def run(dry=False):
 db.bind(**config)
 db.generate_mapping(create_tables=False)
 
-run(True)
-run()
+correct_users(True)
+correct_users()

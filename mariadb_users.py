@@ -58,15 +58,13 @@ def correct_users(dry=False):
         else:
             city_logs.setdefault(user.city, 0)
             city_logs[user.city] += 1
-    if not dry:
-        cities_ordered = OrderedDict(sorted(city_logs.items(), key=lambda item: item[1], reverse=True))
-        pprint(cities_ordered)
-        print('distinct city names not indexed:', len(city_logs))
-        print('total city names not indexed:', sum(city_logs.values()))
+    cities_ordered = OrderedDict(sorted(city_logs.items(), key=lambda item: item[1], reverse=True))
+    pprint(cities_ordered)
+    print('distinct city names not indexed:', len(city_logs))
+    print('total city names not indexed:', sum(city_logs.values()))
 
 
 db.bind(**config_mariadb)
 db.generate_mapping(create_tables=False)
 
 correct_users(True)
-correct_users()

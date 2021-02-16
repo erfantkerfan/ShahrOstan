@@ -4,15 +4,9 @@ from pprint import pprint
 from pony.orm import *
 from tqdm import tqdm
 
+from config import *
 from data import *
 
-config = {
-    'provider': 'mysql',
-    'user': 'root',
-    'password': 'root',
-    'host': '127.0.0.1',
-    'database': 'alaatv',
-}
 db = Database()
 
 cities = {k.strip(): v for (k, v) in cities.items()}
@@ -71,7 +65,7 @@ def correct_users(dry=False):
         print('total city names not indexed:', sum(city_logs.values()))
 
 
-db.bind(**config)
+db.bind(**config_mariadb)
 db.generate_mapping(create_tables=False)
 
 correct_users(True)
